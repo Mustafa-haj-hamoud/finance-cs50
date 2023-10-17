@@ -5,5 +5,3 @@ requests
 Gunicorn
 datetime
 pytz
-urllib
-uuid
