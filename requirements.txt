@@ -6,3 +6,4 @@ Gunicorn
 datetime
 pytz
 werkzeug.security
+functools
