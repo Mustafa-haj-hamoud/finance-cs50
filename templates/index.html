@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    CS50 Finance
+{% endblock %}
+
+{% block main %}
+{% if total %}
+    <h2>Remaining Balance : {{ remaining_balance | usd }}</h2>
+    <table class="table table-hover">
+        <thead>
+            <th>Symbol</th>
+            <th>Quantity</th>
+            <th>Total current price</th>
+            <th>Sell</th>
+        </thead>
+        <tbody>
+            {% for stock in total %}
+            {% if total[stock] != 0 %}
+            <tr>
+                <td>{{ stock }}</td>
+                <td>{{ total[stock] }}</td>
+                <td>{{ assets[stock] | usd }}</td>
+                <td>
+                    <form class="row row-cols-lg-auto g-3 justify-content-center" action="/sell" method="post">
+                        <div class="col-sm-7">
+                            <input hidden name="symbol" value="{{ stock }}">
+                            <input class="form-control" name="shares" id="shares" placeholder="shares" type="number" min="1" max="{{total[stock]}}" step="1">
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit">Sell</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+
+<p><h1> You do not currently own any stocks</h1></p>
+<p><h2>Remaining Balance : {{ remaining_balance | usd }}</h2></p>
+<form action="/buy" method="get">
+    <button class="btn btn-primary" type="submit">Buy Stocks Now</button>
+</form>
+
+{% endif %}
+
+{% endblock %}

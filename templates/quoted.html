@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote for {{ symbol }}
+{% endblock %}
+
+{% block main %}
+{% if result %}
+    <table class="table">
+        <thead>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Symbol</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ result["name"] }}</td>
+                <td>{{ result["price"] | usd }}</td>
+                <td>{{ result["symbol"] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% else %}
+
+    <p><h3>Failed to get quote for "{{ symbol }}"</h2></p>
+
+{% endif %}
+
+    <form action="/quote" method="get">
+        <button class="btn btn-primary"> Quote again </button>
+    </form>
+{% endblock %}

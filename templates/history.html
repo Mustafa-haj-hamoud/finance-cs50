@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table table-hover">
+        <thead>
+            <th>Transaction ID</th>
+            <th>Transaction Type</th>
+            <th>Stock Symbol</th>
+            <th>Number of Shares</th>
+            <th>Total Price</th>
+            <th>Date - Time</th>
+        </thead>
+        <tbody style="font-weight:500;">
+            {% for transaction in hist %}
+            <tr>
+                <td>{{transaction["id"]}}</td>
+                <td>{{transaction["transaction_type"].upper()}}</td>
+                <td>{{transaction["symbol"]}}</td>
+                <td>{{transaction["amount"]}}</td>
+                {% if transaction["transaction_type"] == "buy" %}
+                    <td style="color:red;">- {{transaction["total_price"] | usd}}</td>
+                {% else %}
+                    <td style="color:green;">+ {{transaction["total_price"] | usd}}</td>
+                {% endif %}
+                <td>{{transaction["time_bought"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
