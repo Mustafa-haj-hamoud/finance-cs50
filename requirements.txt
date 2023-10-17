@@ -5,6 +5,5 @@ requests
 Gunicorn
 datetime
 pytz
-subprocess
 urllib
 uuid
