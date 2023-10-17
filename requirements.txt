@@ -6,4 +6,3 @@ Gunicorn
 datetime
 pytz
 Werkzeug
-functools
